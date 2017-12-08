@@ -4,6 +4,7 @@ var expressHandlebars = require("express-handlebars");
 var bodyParser = require("body-parser");
 
 var PORT = process.env.PORT || 8080;
+mongoose.Promise = global.Promise;
 
 var app = express();
 var router = express.Router();
@@ -26,7 +27,7 @@ app.use(router);
 
 var db = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-monogoose.connect(db, function(error) {
+mongoose.connect(db, function(error) {
 	if(error) {
 		console.log(error);
 	} else {

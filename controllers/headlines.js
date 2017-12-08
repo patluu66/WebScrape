@@ -4,7 +4,9 @@ var Headline = require("../models/Headline");
 
 module.exports = {
   fetch: function(cb) {
+
     scrape(function(data) {
+      
       var articles = data;
 
       for(var i = 0; i < articles.length; i++) {
@@ -12,10 +14,11 @@ module.exports = {
         articles[i].saved = false;
       }
 
-      Headline.collection.insertMany(articles, { ordered: false}, funtion(err, docs) {
+      Headline.collection.insertMany(articles, { ordered: false}, function(err, docs) {
         cb(err, docs);
       });
     });
+
   },
   delete: function(query, cb) {
     Headline.remove(query, cb);
@@ -30,7 +33,7 @@ module.exports = {
     });
   },
   update: function(query, cb) {
-    Headline.updated({ _id: query._id }, {
+    Headline.update({ _id: query._id }, {
       $sets: query
     }, {}, cb);
   }
