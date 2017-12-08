@@ -1,5 +1,5 @@
 # WebScrape
-WebScrape is an application that scrape news from the New York Times and save in articles in the db. It allow you to saved articles and comments to your personal profile. 
+WebScrape is an application that scrape news from the New York Times and save the articles in the database. It allows you to save and comment about the article in your personal profile. 
 
 
 ## Installing
