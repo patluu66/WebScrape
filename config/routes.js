@@ -3,16 +3,27 @@ var headlineController = require("../controllers/headlines");
 var notesController = require("../controllers/notes");
 
 module.exports = function(router) {
+
   router.get("/", function(req, res) {
+    // res.send("home");
     res.render('home');
   });
 
-  router.get("saved", function(req, res) {
+  // router.get("/api/fetch", function(req, res) {
+
+  //   res.json({
+  //     message: "No new articles."
+  //   });
+
+  // });
+
+
+  router.get("/saved", function(req, res) {
     res.render("saved");
   });
 
-  reouter.get("/api/fetch", function(req, res) {
-    headlinesController.fetch(function(err, docs) {
+  router.get("/api/fetch", function(req, res) {
+    headlineController.fetch(function(err, docs) {
       if(!docs || docs.insertedCount === 0) {
         res.json({
           message: "No new articles."
@@ -31,7 +42,7 @@ module.exports = function(router) {
       query = req.query;
     }
 
-    headlinesController.get(query, function(data) {
+    headlineController.get(query, function(data) {
       res.json(data);
     });
   });
@@ -40,13 +51,13 @@ module.exports = function(router) {
     var query = {};
     query._id = req.params.id;
 
-    headlinesController.delete(query, function(err, data) {
+    headlineController.delete(query, function(err, data) {
       res.json(data);
     });
   });
 
   router.patch("/api/headlines", function(req, res) {
-    headlinesController.update(req.body, function(err, data) {
+    headlineController.update(req.body, function(err, data) {
       res.json(data);
     });
   });
